@@ -9,7 +9,7 @@ Repository for EEC 201 Winter 2019 **Final Project B**. The goal is to design an
 | -------------                               |:-------------:| -----:|
 | Make Initial Version of GUI                 | Done          |       |
 | Implement recording/playback                | Done          |       |
-| Generate spectrogram of recorded signal     |               |       |
+| Generate spectrogram of recorded signal     | Abhi              |       |
 | Implement saving of recordings              |               |       |
 | Implement synthesizer with spectrogram      |               |       |
 | Implement pitch estimation                  |               |       |
