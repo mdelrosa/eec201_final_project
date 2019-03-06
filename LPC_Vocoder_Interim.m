@@ -20,18 +20,20 @@ classdef LPC_Vocoder_Interim < matlab.apps.AppBase
         % Button pushed function: RecordButton
         function RecordButtonPushed(app, event)
             
+            global audioObject;
             audioObject = audiorecorder;     
             Fs = audioObject.SampleRate;
             duration = str2double(app.DurationinsecondsTextArea.Value{1});
             msgbox('Recording');
             recordblocking(audioObject, duration);
-            msgbox('Done');   
-            y = getaudiodata(audioObject);
-            plot(app.UIAxes, (1/Fs)*(0:length(y)-1), y);
+            msgbox('Done'); 
+            global y_rec;
+            y_rec = getaudiodata(audioObject);
+            plot(app.UIAxes, (1/Fs)*(0:length(y_rec)-1), y_rec);
             %plot(app.UIAxes2, spectrogram(y));
             assignin('base', 'audioObject', audioObject);
             
-                [s,f,t]=spectrogram(y,hamming(240),120,audioObject.SampleRate);
+                [s,f,t]=spectrogram(y_rec,hamming(240),120,audioObject.SampleRate);
                 mags=s.*conj(s);
                 image(app.UIAxes2,f, t, -10.*log10(mags/max(max(mags))));
                 set(app.UIAxes2, 'YDir','normal');
@@ -39,7 +41,8 @@ classdef LPC_Vocoder_Interim < matlab.apps.AppBase
                 xlim(app.UIAxes2,[f(1) f(end)]);
                 %colorbar(app.UIAxes2);
                 
-                reconstructed = y;
+                global sout;
+                reconstructed = sout;
                 [s,f,t]=spectrogram(reconstructed,hamming(240),120,audioObject.SampleRate);
                 mags=s.*conj(s);
                 image(app.UIAxes3,f, t, -10.*log10(mags/max(max(mags))));
