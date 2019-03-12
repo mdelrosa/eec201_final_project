@@ -1,4 +1,4 @@
-function [p1m,pitch] = pitch_detector(xin,ss,es,fs,imf,L,R,n_f,window)
+function [p1m,pitch] = pitch_detector(xin,ss,es,fs,imf,L,R,n_f,window,fsd)
    % wrapper function for pitch generation
    
     % Inputs:
@@ -15,7 +15,8 @@ function [p1m,pitch] = pitch_detector(xin,ss,es,fs,imf,L,R,n_f,window)
     % -> p1m = pitch period at original Fs; use to generate impulses
     % -> pitch = pitch period contour at fsd=8kbit/s
     
-    len_fft=4000;
+%     len_fft=4000;
+    len_fft=4*L;
     cept_file='cepstral.mat';
     
     % ceptsrum-based pitch detector
@@ -43,7 +44,7 @@ function [p1m,pitch] = pitch_detector(xin,ss,es,fs,imf,L,R,n_f,window)
        disp(p1m);
     end
     % pitch normalization
-    fsd=8000;
+%     fsd=8000;
     pitch=round(p1m*fsd/fs);
     % zero pad pitch to lpc length
     if (p_smoothed_len < n_f)

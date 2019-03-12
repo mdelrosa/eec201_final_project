@@ -19,6 +19,9 @@ function [period1,period2,level1,level2]=pitch_detect_candidates(xin,fs,imf,len_
     % -> level1 = most likely pitch level
     % -> level2 = second most likely pitch level
     
+    % threshold for noise
+    noise_thresh=1e-2;
+    
     % cepstral ranges for male vs female speakers
     switch imf
         % denominators indicate range of harmonics for male/female speakers
@@ -45,8 +48,8 @@ function [period1,period2,level1,level2]=pitch_detect_candidates(xin,fs,imf,len_
        frame=xin(max(frame_center-floor(L/2),1):frame_center+floor(L/2));
        frame_len=length(frame);
        % white noise if frame is 0 
-       if max(frame)==0
-          frame=randn(frame_len,1)*.001; 
+       if max(frame)<=noise_thresh
+          frame=randn(frame_len,1)*noise_thresh; 
        end
        % window and zero-pad
        switch window
@@ -64,7 +67,7 @@ function [period1,period2,level1,level2]=pitch_detect_candidates(xin,fs,imf,len_
        % parse cepstrum for peak vals based on period_lo/hi
        subframe_cep=frame_cep(period_lo+1:period_hi+1);
        l1=max(subframe_cep);
-       p1_ind=find(subframe_cep==l1);
+       p1_ind=find(subframe_cep==l1,1);
        p1=p1_ind+period_lo-1;
        period1=[period1 p1];
        level1=[level1 l1];
@@ -75,7 +78,7 @@ function [period1,period2,level1,level2]=pitch_detect_candidates(xin,fs,imf,len_
        subframe_cep2=subframe_cep;
        subframe_cep2(ignore_s:ignore_e)=0;
        l2=max(subframe_cep2);
-       p2_ind=find(subframe_cep2==l2);
+       p2_ind=find(subframe_cep2==l2,1);
        p2=p2_ind+period_lo-1;
        period2=[period2 p2];
        level2=[level2 l2];
