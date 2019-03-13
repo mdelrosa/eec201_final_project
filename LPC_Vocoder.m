@@ -1,4 +1,4 @@
-function varargout = Basic(varargin)
+function varargout = LPC_Vocoder(varargin)
 % BASIC MATLAB code for Basic.fig
 %      BASIC, by itself, creates a new BASIC or raises the existing
 %      singleton*.

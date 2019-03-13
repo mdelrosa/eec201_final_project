@@ -38,7 +38,7 @@ function [p1m,pitch] = pitch_detector(xin,ss,es,fs,imf,L,R,n_f,window,fsd)
     % median pitch
     Lmed=5;
     p1m=med_filt(p_smoothed,Lmed,length(period1));
-    debug=1;
+    debug=0;
     if (debug)
        fprintf('p1m:\n');
        disp(p1m);

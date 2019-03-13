@@ -131,3 +131,4 @@ function [period1,period2,i_start,i_end]=search_interval(period1,period2,i_start
 		i_end=p_change;
 	end
 end
+

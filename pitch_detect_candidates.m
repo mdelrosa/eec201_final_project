@@ -20,7 +20,7 @@ function [period1,period2,level1,level2]=pitch_detect_candidates(xin,fs,imf,len_
     % -> level2 = second most likely pitch level
     
     % threshold for noise
-    noise_thresh=1e-2;
+    noise_thresh=0;
     
     % cepstral ranges for male vs female speakers
     switch imf

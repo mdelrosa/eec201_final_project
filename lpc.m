@@ -10,6 +10,7 @@ function [s_out]=lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd)
     % -> R_frame = frame offset [ms]
     % -> p = LPC model order
     % -> over_frame = # overlapping frames in synthesis
+    % -> fsd = intermediate sampling frequency (might be redundant)
     
     % convert from time [ms] to samples
     L=floor(L_frame*fs/1000);
@@ -54,9 +55,9 @@ function [s_out]=lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd)
     end
     
     %% Synthesize audio
-    [s_out]=synthesize_audio(ss,es,L,R,n_f,exc,G_all,A_all,p,over_frame,window);
+    [s_out]=synthesize_audio(ss,es,L,R,n_f,exc_n,G_all,A_all,p,over_frame,window);
     s_out=normalize_audio(s_out);
-    debug=1;
+    debug=0;
     if debug
         figure(1);clf;hold on;
         subplot(2,1,1);
@@ -66,5 +67,4 @@ function [s_out]=lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd)
         xlabel('Sample');
         ylabel('Mag');
     end
-    
 end
