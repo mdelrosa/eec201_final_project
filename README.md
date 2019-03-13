@@ -5,11 +5,11 @@ Repository for EEC 201 Winter 2019 **Final Project B**. The goal is to design an
   - Abhinav Kamath - agkamath(at)ucdavis.edu
   - Mason del Rosario - mdelrosa(at)ucdavis.edu
 
-# Remaining Tasks
-[ ] March 13-14: Integrate autocorrelation-based pitch detection into LPC synthesizer
-[ ] March 13-14: Bug fixes (synthesizer dropouts)
-[ ] March 14-15: Write report/documentation
-[ ] March 16: Record final presentation
+## Remaining Tasks
+- March 13-14: Integrate autocorrelation-based pitch detection into LPC synthesizer
+- March 13-14: Bug fixes (synthesizer dropouts)
+- March 14-15: Write report/documentation
+- March 16: Record final presentation
 
 ## Methods
 
