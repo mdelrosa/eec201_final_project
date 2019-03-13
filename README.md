@@ -43,7 +43,7 @@ The relevant code which performs the cepstrum-based pitch detection can be found
 #### Method #2: Autocorrelation Pitch Detection
 
 # Results
->![Image of the LPC Synthesizer GUI.](/images/gui.png)
+>![Image of the LPC Synthesizer GUI.](../images/gui.PNG)
 
 <!--For generating inline latex: https://www.codecogs.com/latex/eqneditor.php-->
 <!--For checking markdown files: https://dillinger.io/-->
