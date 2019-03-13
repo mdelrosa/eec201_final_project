@@ -20,7 +20,7 @@ Thus, the main goal in analyzing speech is to determine the transfer function of
 ### Synthesis: Autocorrelation Method
 
 # Results
->![Image of the LPC Synthesizer GUI.](/images/gui.png)
+>![Image of the LPC Synthesizer GUI.](/images/gui.PNG)
 
 <!--For generating inline latex: https://www.codecogs.com/latex/eqneditor.php-->
 <!--For checking markdown files: https://dillinger.io/-->
