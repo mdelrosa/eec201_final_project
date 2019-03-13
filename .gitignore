@@ -1,3 +1,6 @@
+./*.png
+./*.PNG
+*.m~
 *.asv
 *.wav
 *.mp3

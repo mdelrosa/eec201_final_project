@@ -19,8 +19,8 @@
 %> @retval f frequency
 %> @retval t time stamp for the frequency value
 % ======================================================================
-global audioObject;
-function [f, t] = ComputePitch (PitchTimeAmdf, audioObject, f_s, afWindow, iBlockLength, iHopLength)
+global sout;
+function [f, t] = ComputePitch (PitchTimeAmdf, sout, f_s, afWindow, iBlockLength, iHopLength)
 
     % set function handle
     hPitchFunc    = str2func (['Pitch', PitchTimeAmdf]);
@@ -44,16 +44,16 @@ function [f, t] = ComputePitch (PitchTimeAmdf, audioObject, f_s, afWindow, iBloc
         end        
      
         % pre-processing: down-mixing
-        if (size(audioObject,2)> 1)
-            audioObject = mean(audioObject,2);
+        if (size(sout,2)> 1)
+            sout = mean(sout,2);
         end
         % pre-processing: normalization (not necessary for many features)
-        if (size(audioObject,2)> 1)
-            audioObject = audioObject/max(abs(audioObject));
+        if (size(sout,2)> 1)
+            sout = sout/max(abs(sout));
         end
 
         % in the real world, we would do this block by block...
-        [X,f,t]     = spectrogram(  audioObject,...
+        [X,f,t]     = spectrogram(  sout,...
                                     afWindow,...
                                     iBlockLength-iHopLength,...
                                     iBlockLength,...
@@ -63,12 +63,12 @@ function [f, t] = ComputePitch (PitchTimeAmdf, audioObject, f_s, afWindow, iBloc
         X           = abs(X)*2/iBlockLength;
         
         % compute frequency
-        f           = hPitchFunc(X, f_s);
+        f           = hPitchFunc(X, f_s)
     end %if (IsSpectral(cPitchTrackName))
     
     if (IsTemporal(PitchTimeAmdf))
         % compute frequency
-        [f,t]       = hPitchFunc(audioObject, iBlockLength, iHopLength, f_s);
+        [f,t]       = hPitchFunc(sout, iBlockLength, iHopLength, f_s);
     end %if (IsTemporal(cPitchTrackName))
 end
 

@@ -1,4 +1,5 @@
 function [s_out]=lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd)
+
     % analyze sample and generate synthesized version based on lpc coeff
     
     % Inputs:

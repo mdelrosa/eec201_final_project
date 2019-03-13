@@ -16,7 +16,6 @@ ss=1;
 L_frame=20; % frame width in range of 1-100ms
 R_frame=10; % frame offset in range of 1-100ms
 over_frame=1; % # overlapping frames in range of 0-3; dummy val for now
-Fsd=16000;
 
 %% lpc analysis+synthesis 
 global sout;

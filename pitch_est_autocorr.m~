@@ -5,7 +5,7 @@ global sout;
 ip = sout;
 fs = 8000;
 max_expected_period = round(1/50*fs);
-min_expected_period = round(1/500*fs);
+min_expected_period = round(1/200*fs);
 frame_len = 2*max_expected_period;
 debug = 0;
  
@@ -78,9 +78,7 @@ for k = 1 : length(ip)/frame_len -1;
                         end
         end
     end
-    if(debug)
     pause
-    end
 end
  
 

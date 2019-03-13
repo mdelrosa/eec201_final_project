@@ -45,6 +45,7 @@ function [p1m,pitch] = pitch_detector(xin,ss,es,fs,imf,L,R,n_f,window,fsd)
     end
     % pitch normalization
 %     fsd=8000;
+
     pitch=round(p1m*fsd/fs);
     % zero pad pitch to lpc length
     if (p_smoothed_len < n_f)
