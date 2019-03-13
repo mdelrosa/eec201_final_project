@@ -14,7 +14,7 @@ function [p1m,pitch] = pitch_detector(xin,ss,es,fs,imf,L,R,n_f,window)
     % Outputs:
     % -> p1m = pitch period at original Fs; use to generate impulses
     % -> pitch = pitch period contour at fsd=8kbit/s
-    
+   
     len_fft=4000;
     cept_file='cepstral.mat';
     

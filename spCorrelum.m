@@ -18,10 +18,10 @@
 % global r;
 function [r] = spCorrelum(x, fs, maxlag, show)
  %% Initialization
-  global y_rec;
-  global audioObject;
-  fs = audioObject.SampleRate;
-  x = y_rec;
+  global sout;
+%  global audioObject;
+  fs = 16000;
+  x = sout;
 
  if ~exist('maxlag', 'var') || isempty(maxlag)
      maxlag = fs/50; % F0 is greater than 50Hz => 20ms maxlag
@@ -33,22 +33,22 @@ function [r] = spCorrelum(x, fs, maxlag, show)
  %% Auto-correlation
  r = xcorr(x, maxlag, 'coeff');
 
- if (1)
-     %% plot waveform
-     t=(0:length(x)-1)/fs;        % times of sampling instants
-     subplot(2,1,1);
-     plot(t,x);
-     legend('Waveform');
-     xlabel('Time (s)');
-     ylabel('Amplitude');
-     xlim([t(1) t(end)]);
+%  if (1)
+%      %% plot waveform
+%      t=(0:length(x)-1)/fs;        % times of sampling instants
+% %     subplot(2,1,1);
+%      plot(t,x);
+%      legend('Waveform');
+%      xlabel('Time (s)');
+%      ylabel('Amplitude');
+%      xlim([t(1) t(end)]);
 
-     %% plot autocorrelation
-     d=(-maxlag:maxlag)/fs;
-     subplot(2,1,2);
-     plot(d,r);
-     legend('Auto-correlation');
-     xlabel('Lag (s)');
-     ylabel('Correlation coef');
- end
+%      %% plot autocorrelation
+%      d=(-maxlag:maxlag)/fs;
+%      subplot(2,1,2);
+%      plot(d,r);
+%      legend('Auto-correlation');
+%      xlabel('Lag (s)');
+%      ylabel('Correlation coef');
+%  end
 end

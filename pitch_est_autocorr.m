@@ -1,9 +1,9 @@
 %% Using Autocorrelation to track the local period of a signal
 
 %% speech analysis example
-global y_rec; 
-ip = y_rec;
-fs = audioObject.SampleRate;
+global sout; 
+ip = sout;
+fs = 8000;
 max_expected_period = round(1/50*fs);
 min_expected_period = round(1/200*fs);
 frame_len = 2*max_expected_period;
