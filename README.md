@@ -1,9 +1,16 @@
-# eec201_final_project
+<!--# eec201_final_project-->
 ## Background
 Repository for EEC 201 Winter 2019 **Final Project B**. The goal is to design and implement an LPC vocoder and synthesizer in Matlab with a GUI.
 ## Team
   - Abhinav Kamath - agkamath(at)ucdavis.edu
   - Mason del Rosario - mdelrosa(at)ucdavis.edu
+
+# Remaining Tasks
+[ ] March 13-14: Integrate autocorrelation-based pitch detection into LPC synthesizer
+[ ] March 13-14: Bug fixes (synthesizer dropouts)
+[ ] March 14-15: Write report/documentation
+[ ] March 16: Record final presentation
+
 ## Methods
 
 ### Analysis: Autocorrelation Method
@@ -21,9 +28,19 @@ The autocorrelation method fixes the coefficients of the all-pole transfer funct
 
 The relevant code which performs this analysis can be found in [`lpc_analysis.m`](https://github.com/mdelrosa/eec201_final_project/blob/master/lpc_analysis.m).
 
-### Synthesis: Cepstrum Method
+### Synthesis: Excitation Pulse Train
 
-### Synthesis: Autocorrelation Method
+Given the all-pole transfer function above, the main goal in synthesizing an approximation of the original speech sample is to determine the instantaneous pitch of the **excitation pulse train**. In this work, we take two approaches to estimating  pitch: the **cepstrum-based method** and the **autocorrelation method**.
+
+#### Method #1: Cepstrum Pitch Detection
+
+Taking the cepstrum of a sequence allows for determining the period of fundamentals in the sequence. The cepstrum is defined below:
+
+> ![all_pole](https://latex.codecogs.com/gif.latex?%5Ctilde%7Bx%7D%5Bn%5D%3D%5Ctext%7BIFFT%7D%5Cleft%5C%7B%5Clog%7B%5Cleft%28%5Ctext%7BFFT%7D%5Cleft%5C%7Bx%5Bn%5D%5Cright%5C%7D%5Cright%29%7D%5Cright%5C%7D "All-pole transfer function used to characterize human speech samples.")
+
+The relevant code which performs the cepstrum-based pitch detection can be found in [`pitch_detect_candidates.m`](https://github.com/mdelrosa/eec201_final_project/blob/master/pitch_detect_candidates.m).
+
+#### Method #2: Autocorrelation Pitch Detection
 
 # Results
 >![Image of the LPC Synthesizer GUI.](/images/gui.png)
