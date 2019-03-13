@@ -1,1 +1,4 @@
 *.asv
+*.wav
+*.mp3
+!bernie_mike_14700.wav

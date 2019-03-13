@@ -9,7 +9,7 @@
 %>
 %> @retval f amdf lag (in Hz)
 % ======================================================================
-global y_rec
+y_rec = audioread('bernie_mike_14700.wav');
 function [f, t] = PitchTimeAmdf(y_rec, iBlockLength, iHopLength, f_s)
 
     % number of results

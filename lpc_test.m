@@ -17,10 +17,12 @@ ss=1;
 L_frame=20; % frame width in range of 1-100ms
 R_frame=10; % frame offset in range of 1-100ms
 over_frame=1; % # overlapping frames in range of 0-3; dummy val for now
+fsd=16000;
 
 %% lpc analysis+synthesis 
 global sout;
 [sout]=lpc(xin,Fs,ss,es,L_frame,R_frame,p,over_frame,window);
+
 
 %% save audio
 i=strfind(file,'.');
@@ -29,3 +31,4 @@ filetype=file(i:end);
 Fsd=8000*2;
 filename_new=strcat(filename,'_synth_',int2str(Fsd),'.wav');
 audiowrite(filename_new,sout/2,Fsd);
+

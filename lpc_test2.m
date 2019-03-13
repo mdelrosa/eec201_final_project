@@ -17,10 +17,11 @@ ss=1;
 L_frame=20; % frame width in range of 1-100ms
 R_frame=10; % frame offset in range of 1-100ms
 over_frame=1; % # overlapping frames in range of 0-3; dummy val for now
+fsd = 16000;
 
 %% lpc analysis+synthesis 
 global sout2;
-[sout2]=lpc(xin,Fs,ss,es,L_frame,R_frame,p,over_frame,window);
+[sout2]=lpc(xin,Fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd);
 
 %% save audio
 i=strfind(file,'.');

@@ -1,4 +1,6 @@
-function [s_out] = lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window)
+
+function [s_out]=lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd)
+
     % analyze sample and generate synthesized version based on lpc coeff
     
     % Inputs:
@@ -30,8 +32,8 @@ function [s_out] = lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window)
     end
     %% generate pitch
     imf=0; % male voice
-%     imf=1; % female voice
-    [p1m,pitch]=pitch_detector(xin(:,1),ss,es,fs,imf,L,R,n_f,window);
+    imf=1; % female voice
+    [p1m,pitch]=pitch_detector(xin(:,1),ss,es,fs,imf,L,R,n_f,window,fsd);
     
     %% plot pitch period contour
     debug=0;
@@ -44,7 +46,7 @@ function [s_out] = lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window)
     
     %% generate and normalize exciation signal based on pitch
     [exc]=excitation_generator(n_f,R,p1m);
-%     [exc_b,exc_n,G_n]=excitation_normalizer(exc,R,n_f,G_all);
+    [exc_b,exc_n,G_n]=excitation_normalizer(exc,R,n_f,G_all);
     debug=0;
     if debug
         figure(1);clf;hold on;
@@ -54,7 +56,9 @@ function [s_out] = lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window)
     end
     
     %% Synthesize audio
-    [s_out] = synthesize_audio(ss,es,L,R,n_f,exc,G_all,A_all,p,over_frame,window);
+
+    [s_out]=synthesize_audio(ss,es,L,R,n_f,exc,G_all,A_all,p,over_frame,window);
+    s_out=normalize_audio(s_out);
     debug=1;
     if debug
         figure(1);clf;hold on;
@@ -65,4 +69,7 @@ function [s_out] = lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window)
         xlabel('Sample');
         ylabel('Mag');
     end
+
+    
 end
+

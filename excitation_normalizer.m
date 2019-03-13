@@ -18,6 +18,6 @@ function [exc,exc_n,G_n]=excitation_normalizer(ein,R,n_f,G_all)
 		exc=[exc e_temp'];
 		G_temp=G_all(i)/sqrt(sum(e_temp.^2)); % in ref, add 0.01. Ignoring this.
 		G_n=[G_n G_temp];
-		exc_n=[exc_n G_temp*e_temp'];
+		exc_n=[exc_n; G_temp*e_temp'];
 	end
 end
