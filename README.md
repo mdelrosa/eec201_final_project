@@ -4,7 +4,7 @@ Repository for EEC 201 Winter 2019 **Final Project B**. The goal is to design an
 ## Team
   - Abhinav Kamath - agkamath(at)ucdavis.edu
   - Mason del Rosario - mdelrosa(at)ucdavis.edu
-# Methods
+## Methods
 
 ### Analysis: Autocorrelation Method
 
@@ -15,12 +15,18 @@ Thus, the main goal in analyzing speech is to determine the transfer function of
 
 > ![all_pole](https://latex.codecogs.com/gif.latex?A_k%28z%29%3D%5Cfrac%7B1%7D%7Ba_nz%5En&plus;a_%7Bn-1%7Dz%5E%7Bn-1%7D&plus;%5Cdots&plus;a_1z&plus;a_0%7D "All-pole transfer function used to characterize human speech samples.")
 
+The autocorrelation method fixes the coefficients of the all-pole transfer function's denominator by implementing the the following equation:
+
+> ![autocor_analysis](https://latex.codecogs.com/gif.latex?%5Cbegin%7Balign*%7D%20%5Cmathbf%7Br%7D%28j%29%26%3D%5Csum_%7Bk%3D1%7D%5E%7Bn%7D%5Cmathbf%7Br%7D%28j-k%29a_k%5C%5C%20R%5Cmathbf%7Ba%7D%26%3D%5Cmathbf%7Br%7D%5C%5C%20%5Cmathbf%7Ba%7D%26%3DR%5E%7B-1%7D%5Cmathbf%7Br%7D%20%5Cend%7Balign*%7D "Summary of autocorrelation method of finding coefficients, a_k, for the all-pole transfer function.")
+
+The relevant code which performs this analysis can be found in [`lpc_analysis.m`](https://github.com/mdelrosa/eec201_final_project/blob/master/lpc_analysis.m).
+
 ### Synthesis: Cepstrum Method
 
 ### Synthesis: Autocorrelation Method
 
 # Results
->![Image of the LPC Synthesizer GUI.](/images/gui.PNG)
+>![Image of the LPC Synthesizer GUI.](/images/gui.png)
 
 <!--For generating inline latex: https://www.codecogs.com/latex/eqneditor.php-->
 <!--For checking markdown files: https://dillinger.io/-->
