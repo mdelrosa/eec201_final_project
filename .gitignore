@@ -1,5 +1,7 @@
 ./*.png
 ./*.PNG
+untitled*
+*.M~
 *.m~
 *.asv
 *.wav
