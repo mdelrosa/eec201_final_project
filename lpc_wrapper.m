@@ -3,7 +3,7 @@
 % Author: Mason del Rosario
 % Winter 2019
 
-function [sout,fs]=lpc_wrapper(filename,lpc_ord,window,L_frame,R_frame,over_frame)
+function [sout,fs]=lpc_wrapper(filename,lpc_ord,window,L_frame,R_frame,over_frame,detect_method)
 
     % Inputs:
     % -> filename
@@ -14,7 +14,7 @@ function [sout,fs]=lpc_wrapper(filename,lpc_ord,window,L_frame,R_frame,over_fram
     % -> R_frame = frame offset in range of 1-100ms [10ms typical]
     % -> p = LPC model order
     % -> over_frame = # overlapping frames in synthesis (keep as 1 for now)
-    % -> fsd = intermediate sampling frequency (might be redundant)
+    % -> detect_method = pitch detection method; 0=cepstrum, 1=autocorrelation
 
 	[xin,fs]=audioread(filename);
 	% p = 20;
@@ -26,10 +26,9 @@ function [sout,fs]=lpc_wrapper(filename,lpc_ord,window,L_frame,R_frame,over_fram
 	% L_frame=20; % frame width in range of 1-100ms
 	% R_frame=10; % frame offset in range of 1-100ms
 	over_frame=1; % # overlapping frames in range of 0-3; dummy val for now
-	fsd=16000;
 
 	%% lpc analysis+synthesis 
-	[sout]=lpc(xin,fs,ss,es,L_frame,R_frame,lpc_ord,over_frame,window,fsd);
+	[sout]=lpc(xin,fs,ss,es,L_frame,R_frame,lpc_ord,over_frame,window,detect_method);
 
 end
 
