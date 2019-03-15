@@ -1,4 +1,5 @@
-function [s_out]=lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd)
+function [s_out]=lpc(xin,fs,ss,es,L_samp,R_samp,p,over_frame,window,detect_method)
+
     % analyze sample and generate synthesized version based on lpc coeff
     
     % Inputs:
@@ -6,14 +7,19 @@ function [s_out]=lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd)
     % -> fs = signal sampling rate (max 16kbit/s)
     % -> ss = starting sample
     % -> es = ending sample
-    % -> L_frame = length of sample [ms]
-    % -> R_frame = frame offset [ms]
+    % -> L_samp = length of sample [ms]
+    % -> R_samp = frame offset [ms]
     % -> p = LPC model order
     % -> over_frame = # overlapping frames in synthesis
+    % -> window = frame window type (0=uniform truncation, 1=hamming)
+    % -> detect_method = method of detecting pitch per frame (0=cep or 1=autocor)
     
+    % Outputs:
+    % -> sout = synthesized audio output
+
     % convert from time [ms] to samples
-    L=floor(L_frame*fs/1000);
-    R=floor(R_frame*fs/1000);
+    L=floor(L_samp*fs/1000);
+    R=floor(R_samp*fs/1000);
     
     %% lpc analysis
     [A_all,G_all,n_f,excite_t]=lpc_analysis(xin,ss,es,fs,L,R,p,window);
@@ -29,9 +35,12 @@ function [s_out]=lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd)
         plot(ss:es,xin(ss:es,2));
     end
     %% generate pitch
-    imf=0; % male voice
-    imf=1; % female voice
-    [p1m,pitch]=pitch_detector(xin(:,1),ss,es,fs,imf,L,R,n_f,window,fsd);
+    % imf=0; % male voice
+    % imf=1; % female voice
+    imf=2; % male voice
+    % detect_method=0; % cepstrum
+    % detect_method=1; % autocorrelation
+    p1m=pitch_detector(xin(:,1),ss,es,fs,imf,L,R,n_f,window,detect_method);
     
     %% plot pitch period contour
     debug=0;
@@ -54,9 +63,9 @@ function [s_out]=lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd)
     end
     
     %% Synthesize audio
-    [s_out]=synthesize_audio(ss,es,L,R,n_f,exc,G_all,A_all,p,over_frame,window);
+    [s_out]=synthesize_audio(ss,es,L,R,n_f,exc_n,G_all,A_all,p,over_frame,window);
     s_out=normalize_audio(s_out);
-    debug=1;
+    debug=0;
     if debug
         figure(1);clf;hold on;
         subplot(2,1,1);
@@ -66,5 +75,4 @@ function [s_out]=lpc(xin,fs,ss,es,L_frame,R_frame,p,over_frame,window,fsd)
         xlabel('Sample');
         ylabel('Mag');
     end
-    
 end

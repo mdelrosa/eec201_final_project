@@ -20,18 +20,10 @@ function [period1,period2,level1,level2]=pitch_detect_candidates(xin,fs,imf,len_
     % -> level2 = second most likely pitch level
     
     % threshold for noise
-    noise_thresh=1e-2;
+    noise_thresh=0;
     
     % cepstral ranges for male vs female speakers
-    switch imf
-        % denominators indicate range of harmonics for male/female speakers
-        case 0 % male
-            period_lo=round(fs/250);
-            period_hi=round(fs/60);
-        case 1 % female
-            period_lo=round(fs/350);
-            period_hi=round(fs/150);
-    end
+    [period_lo,period_hi]=pitch_range(imf,fs,0);
     
     % partition input signal based on L and R
     x_len = length(xin);
