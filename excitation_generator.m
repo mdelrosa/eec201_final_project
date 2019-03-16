@@ -16,7 +16,7 @@ function [exc]=excitation_generator(n_f,R,pitch)
     for i=1:n_f
        p=pitch(i);
        if p==0
-           % Gaussian noise for unvoiced sound
+          % Gaussian noise for unvoiced sound
           exc=[exc randn(R,1)];
        else
           if p_last == 0

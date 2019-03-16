@@ -18,9 +18,10 @@ R_frame=10; % frame offset in range of 1-100ms
 over_frame=1; % # overlapping frames in range of 0-3; dummy val for now
 detect_method=0; % cepstrum
 % detect_method=1; % autocorrelation
+pitch_shift=1;
 
 %% lpc analysis+synthesis 
-[sout]=lpc(xin,Fs,ss,es,L_frame,R_frame,p,over_frame,window,detect_method);
+[sout]=lpc(xin,Fs,ss,es,L_frame,R_frame,p,over_frame,window,detect_method,pitch_shift);
 
 %% save audio
 i=strfind(file,'.');

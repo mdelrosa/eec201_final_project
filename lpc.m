@@ -1,4 +1,4 @@
-function [s_out]=lpc(xin,fs,ss,es,L_samp,R_samp,p,over_frame,window,detect_method)
+function [s_out]=lpc(xin,fs,ss,es,L_samp,R_samp,p,over_frame,window,detect_method,pitch_shift)
 
     % analyze sample and generate synthesized version based on lpc coeff
     
@@ -37,7 +37,7 @@ function [s_out]=lpc(xin,fs,ss,es,L_samp,R_samp,p,over_frame,window,detect_metho
     %% generate pitch
     % imf=0; % male voice
     % imf=1; % female voice
-    imf=2; % male voice
+    imf=2; % composite range
     % detect_method=0; % cepstrum
     % detect_method=1; % autocorrelation
     p1m=pitch_detector(xin(:,1),ss,es,fs,imf,L,R,n_f,window,detect_method);
@@ -52,6 +52,12 @@ function [s_out]=lpc(xin,fs,ss,es,L_samp,R_samp,p,over_frame,window,detect_metho
     end
     
     %% generate and normalize exciation signal based on pitch
+    pitch_shift_factor=1.5;
+    if pitch_shift
+       p1m
+       pitch_shift
+       p1m=round(pitch_shift_factor*p1m);
+    end
     [exc]=excitation_generator(n_f,R,p1m);
     [exc_b,exc_n,G_n]=excitation_normalizer(exc,R,n_f,G_all);
     debug=0;
