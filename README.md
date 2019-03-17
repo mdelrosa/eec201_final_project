@@ -1,15 +1,15 @@
 <!--# eec201_final_project-->
+## Presentation
+[![Link to final presentation](https://img.youtube.com/vi/_7KegbahrVY/0.jpg)](https://www.youtube.com/watch?v=_7KegbahrVY)
+
+## Final Report
+[Link to Final Report](https://github.com/mdelrosa/eec201_final_project/blob/master/Final%20Report%20-%20Kamath%2C%20del%20Rosario.pdf)
+
 ## Background
 Repository for EEC 201 Winter 2019 **Final Project B**. The goal is to design and implement an LPC vocoder and synthesizer in Matlab with a GUI.
 ## Team
   - Abhinav Kamath - agkamath(at)ucdavis.edu
   - Mason del Rosario - mdelrosa(at)ucdavis.edu
-
-## Remaining Tasks
-- March 13-14: Integrate autocorrelation-based pitch detection into LPC synthesizer
-- March 13-14: Bug fixes (synthesizer dropouts)
-- March 14-15: Write report/documentation
-- March 16: Record final presentation
 
 ## Methods
 
@@ -42,7 +42,14 @@ The relevant code which performs the cepstrum-based pitch detection can be found
 
 #### Method #2: Autocorrelation Pitch Detection
 
-# Results
+The autocorrelation is computed frame-by-frame. For the ACF of a frame, the number of samples between the center peak and the next highest peak is its pitch-period estimate. In order to find the second peak, the central peak is suppressed, as are all negative autocorrelation values. The fundamental-frequency estimate or the pitch estimate is simply the sampling frequency of the audio signal divided by the pitch-period estimate.
+
+> ![autocor_analysis](https://latex.codecogs.com/gif.latex?r_%7Bt%7D%5Cleft%28%20%5Ctau%20%5Cright%29%20%3D%5Csum%20%5E%7Bw-%5Ctau%20%7D_%7Bj%3D1%7Dx_%7Bj%7Dx_%7Bj&plus;%5Ctau%20%7D "Autocorrelation method for pitch detection.")
+
+## Results
+
+>![Comparison between original audio signal, cepstrum-based estimate, and autocorrelation-based estimate.](https://github.com/mdelrosa/eec201_final_project/blob/master/images/pitch_comparison.png)
+
 >![Image of the LPC Synthesizer GUI.](https://github.com/mdelrosa/eec201_final_project/blob/master/images/gui.PNG)
 
 <!--For generating inline latex: https://www.codecogs.com/latex/eqneditor.php-->
